@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Проба телефона</title>
+<style>
+:root { --fon: #f7f6f2; --tekst: #1d1d1b; --tusk: #6b6a65; --ramka: #d9d6cc; --akcent: #1f6f5c; --plashka: #ffffff; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --fon: #161614; --tekst: #ecebe6; --tusk: #a3a29c; --ramka: #3a3934; --akcent: #5fbfa5; --plashka: #22221f; }
+}
+:root[data-theme="dark"] { --fon: #161614; --tekst: #ecebe6; --tusk: #a3a29c; --ramka: #3a3934; --akcent: #5fbfa5; --plashka: #22221f; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 16px; background: var(--fon); color: var(--tekst);
+       font: 17px/1.45 -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+h1 { font-size: 22px; margin: 0 0 4px; }
+.tusk { color: var(--tusk); font-size: 15px; }
+.proba { background: var(--plashka); border: 1px solid var(--ramka); border-radius: 12px; padding: 14px; margin: 14px 0; }
+.proba h2 { font-size: 18px; margin: 0 0 6px; }
+.zhdem { color: var(--tusk); font-size: 15px; margin: 6px 0 0; }
+/* 1. Выбор направления радиокнопками */
+.vybor input { position: absolute; opacity: 0; pointer-events: none; }
+.vybor label { display: inline-block; padding: 8px 12px; margin: 4px 4px 4px 0; border: 1px solid var(--ramka); border-radius: 20px; cursor: pointer; }
+.vybor .itog-vybora div { display: none; margin-top: 8px; font-weight: 600; }
+.vybor .itog-vybora .nichego { display: block; font-weight: 400; color: var(--tusk); }
+#r-neft:checked ~ label[for="r-neft"], #r-gaz:checked ~ label[for="r-gaz"], #r-prof:checked ~ label[for="r-prof"] { background: var(--akcent); color: #fff; border-color: var(--akcent); }
+#r-neft:checked ~ .itog-vybora .nichego, #r-gaz:checked ~ .itog-vybora .nichego, #r-prof:checked ~ .itog-vybora .nichego { display: none; }
+#r-neft:checked ~ .itog-vybora .t-neft, #r-gaz:checked ~ .itog-vybora .t-gaz, #r-prof:checked ~ .itog-vybora .t-prof { display: block; }
+/* 2 и 3. Раскрытие и минута */
+details summary { cursor: pointer; color: var(--akcent); font-weight: 600; padding: 6px 0; }
+.lenta { height: 14px; border-radius: 7px; background: var(--ramka); overflow: hidden; margin-top: 8px; }
+.polosa { height: 100%; width: 100%; background: var(--akcent); }
+details[open] .polosa { animation: szhatie 15s linear forwards; }
+@keyframes szhatie { from { width: 100%; } to { width: 0; } }
+/* 4. Отметки и счёт без скриптов */
+.otmetki { counter-reset: otm; }
+.otmetki input:checked { counter-increment: otm; }
+.otmetki label { display: block; padding: 6px 0; }
+.otmetki .schet::after { content: counter(otm); font-weight: 700; }
+.da { color: var(--akcent); font-weight: 700; }
+</style>
+</head>
+<body>
+<h1>Проба телефона</h1>
+<p class="tusk">Минута проверки перед страницей подготовки к финалу. Пройдите шесть пунктов по порядку
+и напишите, какие сработали: например, «1, 2, 3, 4 — да; 5, 6 — нет» и какой у вас телефон.</p>
+
+<div class="proba vybor">
+  <h2>1. Выбор направления</h2>
+  <input type="radio" name="napr" id="r-neft"><input type="radio" name="napr" id="r-gaz"><input type="radio" name="napr" id="r-prof">
+  <label for="r-neft">Нефть</label><label for="r-gaz">Газ</label><label for="r-prof">Профсоюз</label>
+  <div class="itog-vybora">
+    <div class="nichego">Пока ничего не выбрано.</div>
+    <div class="t-neft">Выбрано: Нефть</div><div class="t-gaz">Выбрано: Газ</div><div class="t-prof">Выбрано: Профсоюз</div>
+  </div>
+  <p class="zhdem">Должно быть: нажали кнопку — она подсветилась, а строка ниже сменилась на «Выбрано: …».</p>
+</div>
+
+<div class="proba">
+  <h2>2. Ответ по нажатию</h2>
+  <p>Что буквально означает слово «петролеум»?</p>
+  <details><summary>Показать ответ</summary><p>«Каменное масло»: латинское petra — камень, oleum — масло.</p></details>
+  <p class="zhdem">Должно быть: нажали «Показать ответ» — появился ответ.</p>
+</div>
+
+<div class="proba">
+  <h2>3. Минута</h2>
+  <details><summary>Начать минуту</summary><div class="lenta"><div class="polosa"></div></div></details>
+  <p class="zhdem">Должно быть: нажали «Начать минуту» — полоска за 15 секунд сжалась до нуля. В настоящей странице будет 60 секунд.</p>
+</div>
+
+<div class="proba otmetki">
+  <h2>4. Отметки</h2>
+  <label><input type="checkbox"> Взял вопрос 1</label>
+  <label><input type="checkbox"> Взял вопрос 2</label>
+  <p>Отмечено: <span class="schet"></span></p>
+  <p class="zhdem">Должно быть: поставили галочки — число «Отмечено» выросло.</p>
+</div>
+
+<div class="proba">
+  <h2>5. Скрипты</h2>
+  <p id="skripty">Скрипты не работают.</p>
+  <p class="zhdem">На компьютере и Android обычно видно «Скрипты работают». Если видно «не работают» — это не поломка, просто запишите.</p>
+</div>
+
+<div class="proba">
+  <h2>6. Память</h2>
+  <p id="pamyat">Память не работает (ей нужны скрипты).</p>
+  <p class="zhdem">Закройте файл и откройте снова тем же способом. Должно быть: число открытий выросло на один.</p>
+</div>
+
+<script>
+document.getElementById("skripty").innerHTML = '<span class="da">Скрипты работают.</span>';
+(function () {
+  var el = document.getElementById("pamyat");
+  try {
+    var n = parseInt(localStorage.getItem("proba-telefona-otkrytiya") || "0", 10) + 1;
+    localStorage.setItem("proba-telefona-otkrytiya", String(n));
+    el.innerHTML = 'Этот файл открыт на этом телефоне: <span class="da">' + n + '</span> раз.';
+  } catch (e) {
+    el.textContent = "Скрипты работают, но браузер не даёт ничего запомнить.";
+  }
+})();
+</script>
+</body>
+</html>
